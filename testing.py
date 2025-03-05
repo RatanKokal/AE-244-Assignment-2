@@ -78,12 +78,12 @@ def fourier_coefficients(x, yc, alpha, num_terms=10):
     theta = np.array([theta[i] for i in valid_indices])
     
     delta_theta = np.pi / x.shape[0]
-    a0 = alpha - (1 / np.pi) * np.sum(dz_dx * delta_theta)
+    a0 = alpha * np.pi / 180 - (1 / np.pi) * np.sum(dz_dx * delta_theta)
     an = [2 / np.pi * np.sum(dz_dx * np.cos(n * theta) * delta_theta) for n in range(1, num_terms + 1)]
     
     return a0, an
 
-def circulation(x, yc, alpha, vel_inf=1, num_terms=10):
+def circulation(x, yc, alpha, vel_inf=20, num_terms=10):
     """
     Computes circulation distribution using Fourier coefficients.
     
@@ -135,7 +135,7 @@ def lift_coefficient(x, yc, alpha, num_terms=10):
     a0, an = fourier_coefficients(x, yc, alpha, num_terms=num_terms)
     return np.pi * (2 * a0 + an[0])
 
-def vector_field(x, yc, gamma_vals, vel_inf=1, grid_size=(300, 400)):
+def vector_field(x, yc, gamma_vals, alpha, vel_inf=20, grid_size=(300, 400)):
     """
     Computes and plots the vector field around the airfoil using discrete vortex summation.
     """
@@ -145,14 +145,19 @@ def vector_field(x, yc, gamma_vals, vel_inf=1, grid_size=(300, 400)):
     x_vortices, y_vortices = x, yc
     U, V = np.zeros_like(X), np.zeros_like(Y)
     
+    U += vel_inf * np.cos(alpha*np.pi/180)
+    V += vel_inf * np.sin(alpha*np.pi/180)
+    
     for i in range(len(x_vortices)):
         dx, dy = X - x_vortices[i], Y - y_vortices[i]
         r2 = dx**2 + dy**2 + 1e-12  # Avoid singularities
-        U += (gamma_vals[i] / (2 * np.pi)) * (dy / r2) + vel_inf
-        V += (gamma_vals[i] / (2 * np.pi)) * (-dx / r2)
+        U += (gamma_vals[i] * (x[1] - x[0]) / (2 * np.pi)) * (dy / r2) 
+        V += (gamma_vals[i] * (x[1] - x[0]) / (2 * np.pi)) * (-dx / r2)
+        
+    mag = np.sqrt(U**2 + V**2)
     
     plt.figure(figsize=(10, 6))
-    plt.quiver(X, Y, U, V, np.sqrt(U**2 + V**2), cmap='viridis', scale_units='xy')
+    plt.quiver(X, Y, U, V, mag, cmap='viridis', scale_units='xy')
     plt.scatter(x_vortices, y_vortices, color='red', marker='o', s=1, label='Discrete Vortices')
     plt.axhline(0, color='black', linestyle='--', linewidth=0.5)
     plt.xlabel('x (chord length)')
@@ -166,7 +171,7 @@ def vector_field(x, yc, gamma_vals, vel_inf=1, grid_size=(300, 400)):
 def main():
     """Main function to compute circulation and lift coefficient for a NACA airfoil."""
     N = 10000
-    x, yc = custom_camber(N)
+    x, yc = naca(0.02, 0.4, N)
     alpha = 0
     cl = lift_coefficient(x, yc, alpha)
     gamma_vals, theta = circulation(x, yc, alpha, num_terms=100)
@@ -175,7 +180,7 @@ def main():
     print(f'Lift coefficient at alpha = {alpha}: {cl}')
     print(f'Total circulation at alpha = {alpha}: {circ}')
     
-    vector_field(x, yc, gamma_vals)
+    vector_field(x, yc, gamma_vals, alpha)
     plt.plot(theta, gamma_vals, label='Circulation Distribution')
     plt.xlabel('Theta')
     plt.ylabel('Gamma')
