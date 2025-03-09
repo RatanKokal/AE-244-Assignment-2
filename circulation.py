@@ -15,6 +15,8 @@ def circulation(x, yc, alpha, vel_inf=20, num_terms=100):
     Returns:
     tuple: Gamma values and corresponding theta values.
     """
+
+    #a0,an are the fourier coefficients
     a0, an = fourier_coefficients(x, yc, alpha, num_terms=num_terms)
     # x is evenly spaced from 0 to 1, coefficients are calculated for corresponding theta values
     # x = c/2 * (1 - cos(theta)), theta = arccos(1 - 2x)
