@@ -17,7 +17,9 @@ def circulation(x, yc, alpha, vel_inf=20, num_terms=100):
     """
     a0, an = fourier_coefficients(x, yc, alpha, num_terms=num_terms)
     # x is evenly spaced from 0 to 1, coefficients are calculated for corresponding theta values
+    # x = c/2 * (1 - cos(theta)), theta = arccos(1 - 2x)
     theta = np.arccos(1 - 2 * x)
+    # Formula as discussed in thin airfoil theory class
     gamma_vals = 2 * vel_inf * a0 * (1 + np.cos(theta)) / np.sin(theta)
     for n in range(1, num_terms + 1):
         gamma_vals += 2 * vel_inf * an[n-1] * np.sin(n * theta)

@@ -23,6 +23,7 @@ def main():
     v_infs = []
     alphas_group = []
     
+    # Loading all paramters
     for airfoil in airfoil_params:
         name = airfoil.get('name')
         names.append(name)
@@ -80,9 +81,10 @@ def main():
     plt.show()
     
     data = []
+    # Plotting the lift coefficient
     plt.figure(figsize=(10, 6))
     
-    # Computing lift and moment coefficients
+    # Computing lift coefficients
     for i in range(len(names)):
         x = xs[i]
         yc = ycs[i]
@@ -109,6 +111,7 @@ def main():
     df = pd.DataFrame(data)
     print(df)
     
+    # computing moment coefficients
     for i in range(len(names)):
         x = xs[i]
         yc = ycs[i]

@@ -9,11 +9,11 @@ This project is designed to analyze the aerodynamic properties of airfoils using
 - **camber.py**: Contains functions to generate the mean camber line for NACA and custom airfoils.
 - **circulation.py**: Computes the circulation distribution using Fourier coefficients.
 - **fourier_coefficients.py**: Computes the Fourier coefficients for the mean camber line.
-- **input.txt**: Contains input parameters for the analysis.
+- **config.json**: Contains input parameters for the analysis.
 - **lift_coefficient.py**: Computes the lift coefficient from Fourier coefficients and circulation.
 - **main.py**: Main script to run the analysis, plot results, and display outputs.
 - **moment_coefficient.py**: Computes the moment coefficient from Fourier coefficients and circulation.
-- **parameter_getter.py**: Reads parameters from a text file.
+- **parameter_getter.py**: Reads parameters from a json file.
 - **slope_camber.py**: Computes the slope of the mean camber line at a given x-coordinate.
 - **tot_circulation.py**: Computes the total circulation by integrating gamma over theta.
 - **vector_field.py**: Computes the vector field around the airfoil using discrete vortex summation.
@@ -22,18 +22,22 @@ This project is designed to analyze the aerodynamic properties of airfoils using
 
 1. **Install Dependencies**:
     Ensure you have the following dependencies installed:
+    - `pandas`
     - `numpy`
     - `sympy`
     - `matplotlib`
 
     You can install them using pip:
     ```sh
-    pip install numpy sympy matplotlib
+    pip install numpy sympy matplotlib pandas
     ```
 
 2. **Prepare Input File**:
-    Edit the [input.txt](./input.txt) file to set the desired parameters for the analysis.
+    Edit the [config.json](./config.json) file to set the desired parameters for the analysis.
+    To add a new airfoil just add a new set of braces and paramters inside it, if option 1 is chosen f1 can be null and if option 2 is chosen camber and position can be null.
+    
     Parameters :
+    - name : Name of the airfoil
     - option : 1 for NACA airfoil and 2 for custom
     - f1 : function of mean camber line if custom chosen
     - camber : Camber of desired NACA airfoil
@@ -53,9 +57,10 @@ This project is designed to analyze the aerodynamic properties of airfoils using
 - [numpy](http://_vscodecontentref_/16): For numerical computations.
 - [sympy](http://_vscodecontentref_/17): For symbolic mathematics.
 - [matplotlib](http://_vscodecontentref_/18): For plotting graphs and visualizations.
+- [pandas](http://_vscodecontentref_/19) : For beter presentation.
 
 ## Example
 
-To run the project with the default parameters in [input.txt](./input.txt), simply execute:
+To run the project with the default parameters in [config.json](./config.json), simply execute:
 ```sh
 python main.py

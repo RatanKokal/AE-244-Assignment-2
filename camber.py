@@ -14,6 +14,7 @@ def naca(max_camber, pos, N=10000):
     tuple: Arrays of x-coordinates and mean camber line (yc).
     """
     x = np.linspace(1/N, 1, N)
+    # Using NACA 4 digit series equation
     yc = np.where(x < pos,
                   max_camber / pos**2 * (2 * pos * x - x**2),
                   max_camber / (1 - pos)**2 * ((1 - 2 * pos) + 2 * pos * x - x**2))
@@ -35,7 +36,8 @@ def custom_camber(f1, N=10000):
     
     X = sp.symbols('x')
     f1 = sp.sympify(f1)
-    print(type(f1))
+
+    # Substitute values in curve
     yc= np.array([np.float32(f1.subs(X, x_val)) for x_val in x])
     
     return x, yc
