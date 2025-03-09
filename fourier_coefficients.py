@@ -16,6 +16,7 @@ def fourier_coefficients(x, yc, alpha, num_terms=100):
     """
     theta = np.linspace(0, np.pi, x.shape[0])
     x_cords = 0.5 * (1 - np.cos(theta))
+    #dz_dx is the array of slope of camber line at each point
     dz_dx = np.array([slope_camber(x, yc, x_cord) for x_cord in x_cords])
     # Prune the None values
     valid_indices = [i for i, val in enumerate(dz_dx) if val is not None]
@@ -24,6 +25,7 @@ def fourier_coefficients(x, yc, alpha, num_terms=100):
     
     delta_theta = np.pi / x.shape[0]
     # Using the formula given in slides
+    #Calculating the Fourier coefficients A0, An
     a0 = alpha * np.pi / 180 - (1 / np.pi) * np.sum(dz_dx * delta_theta)
     an = [2 / np.pi * np.sum(dz_dx * np.cos(n * theta) * delta_theta) for n in range(1, num_terms + 1)]
     
