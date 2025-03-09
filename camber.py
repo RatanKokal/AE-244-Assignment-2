@@ -35,7 +35,7 @@ def custom_camber(f1, N=10000):
     
     X = sp.symbols('x')
     f1 = sp.sympify(f1)
-    
+    print(type(f1))
     yc= np.array([np.float32(f1.subs(X, x_val)) for x_val in x])
     
     return x, yc

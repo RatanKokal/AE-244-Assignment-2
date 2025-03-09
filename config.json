@@ -1,0 +1,25 @@
+{
+    "airfoils": [
+      {
+        "name": "idk",
+        "option": 1,
+        "f1": null,
+        "camber": 0.059,
+        "position": 0.41,
+        "N": 10000,
+        "alpha": [-3, 0, 3, 6, 9, 12],
+        "v_inf": 20
+      },
+      {
+        "name": "idk2",
+        "option": 1,
+        "f1": null,
+        "camber": 0.011,
+        "position": 0.21,
+        "N": 10000,
+        "alpha": [-3, 0, 3, 6, 9, 12],
+        "v_inf": 20
+      }
+    ]
+  }
+  
