@@ -1,0 +1,7 @@
+option = 2
+f1 = 0
+camber = 0.059
+position = 0.41
+N = 10000
+alpha = 3
+v_inf = 20
