@@ -1,4 +1,3 @@
-
 # AE 244 Assignment 2
 
 This project is designed to analyze the aerodynamic properties of airfoils using various computational methods. The project includes functions to compute the mean camber line, circulation distribution, lift coefficient, moment coefficient, and the velocity field around the airfoil.
@@ -34,7 +33,7 @@ This project is designed to analyze the aerodynamic properties of airfoils using
 
 2. **Prepare Input File**:
     Edit the [config.json](./config.json) file to set the desired parameters for the analysis.
-    To add a new airfoil just add a new set of braces and paramters inside it, if option 1 is chosen f1 can be null and if option 2 is chosen camber and position can be null.
+    To add a new airfoil just add a new set of braces and parameters inside it, if option 1 is chosen f1 can be null and if option 2 is chosen camber and position can be null.
     
     Parameters :
     - name : Name of the airfoil
@@ -52,12 +51,15 @@ This project is designed to analyze the aerodynamic properties of airfoils using
     python main.py
     ```
 
+4. **Interactive Features**:
+    The script now includes sliders for live variation in velocity magnitude and angle of attack. Adjust the sliders to see real-time updates in the plots and calculations.
+
 ## Dependencies
 
 - [numpy](http://_vscodecontentref_/16): For numerical computations.
 - [sympy](http://_vscodecontentref_/17): For symbolic mathematics.
 - [matplotlib](http://_vscodecontentref_/18): For plotting graphs and visualizations.
-- [pandas](http://_vscodecontentref_/19) : For beter presentation.
+- [pandas](http://_vscodecontentref_/19) : For better presentation.
 
 ## Example
 
