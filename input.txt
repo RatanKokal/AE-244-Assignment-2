@@ -1,5 +1,5 @@
-option = 2
-f1 = 0
+option = 1
+f1 = 
 camber = 0.059
 position = 0.41
 N = 10000

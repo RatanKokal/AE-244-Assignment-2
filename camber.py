@@ -25,6 +25,7 @@ def custom_camber(f1, N=10000):
     
     Parameters:
     N (int): Number of points along the chord.
+    f1 (str): Function of x for the mean camber line.
     
     Returns:
     tuple: Arrays of x-coordinates and mean camber line (yc).

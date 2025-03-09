@@ -36,6 +36,8 @@ def main():
     # Plotting the mean camber line
     plt.figure(figsize=(10, 6))
     plt.plot(x, yc, label='Mean Camber Line')
+    plt.xlim(-0.2, 1.2)
+    plt.ylim(-0.2, 0.6)
     plt.xlabel('x (chord length)')
     plt.ylabel('y (chord length)')
     plt.title('Mean Camber Line of Airfoil')
@@ -94,8 +96,9 @@ def main():
     plt.show()
     
     # Computing total circulation
-    circ = total_circulation(x, gamma_vals)
-    print(f'Total circulation at alpha = {alpha}: {circ}')
+    circ_vortex, circ_line = total_circulation(x, gamma_vals, U, V, ds=X[0, 1] - X[0, 0])
+    print(f'Total circulation using vortex filaments at alpha = {alpha}: {circ_vortex}')
+    print(f'Total circulation using line integral at alpha = {alpha}: {circ_line}')
     
 if __name__ == "__main__":
     main()

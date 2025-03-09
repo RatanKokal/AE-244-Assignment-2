@@ -1,6 +1,6 @@
 import numpy as np
 
-def vector_field(x, yc, gamma_vals, alpha, vel_inf=20, grid_size=(300, 400)):
+def vector_field(x, yc, gamma_vals, alpha, vel_inf=20, grid_size=(400, 300)):
     """
     Computes the vector field around the airfoil using discrete vortex summation.
     
@@ -15,8 +15,8 @@ def vector_field(x, yc, gamma_vals, alpha, vel_inf=20, grid_size=(300, 400)):
     Returns:
     tuple: X, Y, U, V, v_max, v_min.
     """
-    x_grid = np.linspace(-1, 3, grid_size[1])  # 4c domain along x
-    y_grid = np.linspace(-1.5, 1.5, grid_size[0])  # 3c domain along y
+    x_grid = np.linspace(-1, 3, grid_size[0])  # 4c domain along x
+    y_grid = np.linspace(-1.5, 1.5, grid_size[1])  # 3c domain along y
     X, Y = np.meshgrid(x_grid, y_grid)
     U, V = np.zeros_like(X), np.zeros_like(Y)
     
